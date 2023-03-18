@@ -1,0 +1,92 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@using BeyzanurDuzceEduTr.Models.Entities;
+@model IEnumerable<Announcement>
+<!-- Carousel Start -->
+<div class="container-fluid px-0 mb-5">
+    <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <video controls="controls">
+                    <source src="~/Content/D%c3%bczce%20%c3%9cniversitesi.mp4" type="video/mp4" />
+                </video>
+                <div class="carousel-caption">
+                    <div class="container">
+                        <div class="row justifındy-content-center">
+                            <div class="col-lg-10 text-start">
+                                <p class="fs-5 fw-medium text-primary text-uppercase animated slideInRight">
+
+
+                                </p>
+                                <h1 class="display-1 text-white mb-5 animated slideInRight">
+                                    Değer Üreten
+                                    Üniversite
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#header-carousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
+<!-- Carousel End -->
+<!-- Testimonial Start -->
+@await Component.InvokeAsync("Duyurular")
+
+
+<!-- Testimonial End -->
+<!-- Facts Start -->
+<div class="container-fluid facts my-5 p-5">
+    <h4>2006'DAN BUGÜNE</h4>
+    <div class="row g-5">
+        <div class="col-md-6 col-xl-3 wow fadeIn" data-wow-delay="0.1s">
+            <div class="text-center border p-5">
+                <i class="fa fa-certificate fa-3x text-white mb-3"></i>
+                <h1 class="display-2 text-primary mb-0" data-toggle="counter-up">84</h1>
+                <span class="fs-5 fw-semi-bold text-white">Lisans Programı</span>
+            </div>
+        </div>
+        <div class="col-md-6 col-xl-3 wow fadeIn" data-wow-delay="0.3s">
+            <div class="text-center border p-5">
+                <i class="fa fa-users-cog fa-3x text-white mb-3"></i>
+                <h1 class="display-2 text-primary mb-0" data-toggle="counter-up">94</h1>
+                <span class="fs-5 fw-semi-bold text-white">LİSANSÜSTÜ PROGRAMI</span>
+            </div>
+        </div>
+        <div class="col-md-6 col-xl-3 wow fadeIn" data-wow-delay="0.5s">
+            <div class="text-center border p-5">
+                <i class="fa fa-users fa-3x text-white mb-3"></i>
+                <h1 class="display-2 text-primary mb-0" data-toggle="counter-up">31</h1>
+                <span class="fs-5 fw-semi-bold text-white">UYGULAMA ARAŞTIRMA MERKEZİ</span>
+            </div>
+        </div>
+        <div class="col-md-6 col-xl-3 wow fadeIn" data-wow-delay="0.7s">
+            <div class="text-center border p-5">
+                <i class="fa fa-check-double fa-3x text-white mb-3"></i>
+                <h1 class="display-2 text-primary mb-0" data-toggle="counter-up"style="color:turquoise">12</h1>
+                <span class="fs-5 fw-semi-bold text-white">KOORDİNATÖRLÜK</span>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Facts End -->
+@section Scripts{
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            $("#modalPopup").Modal("show");
+
+
+        });
+    </script>
+}

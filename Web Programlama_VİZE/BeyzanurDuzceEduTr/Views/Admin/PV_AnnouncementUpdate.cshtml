@@ -1,0 +1,25 @@
+﻿@model BeyzanurDuzceEduTr.Models.Entities.Announcement
+
+
+<div class="row">
+    <div class="col-md-12">
+        <form id="updateAnnForm">
+            <div class="form-group">
+                <label asp-for="AnnouncementId" class="control-label"></label>
+                <input asp-for="AnnouncementId" class="form-control" readonly />
+            </div>
+            <div class="form-group">
+                <label asp-for="Subject" class="control-label"></label>
+                <input asp-for="Subject" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Detail" class="control-label"></label>
+                <textarea asp-for="Detail" class="form-control" rows="5" ></textarea>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreateDate" class="control-label"></label>
+                <input asp-for="CreateDate" class="form-control" readonly />
+            </div>
+        </form>
+    </div>
+</div>

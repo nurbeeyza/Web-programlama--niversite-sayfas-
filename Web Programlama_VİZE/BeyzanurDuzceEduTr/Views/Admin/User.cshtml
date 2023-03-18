@@ -1,0 +1,209 @@
+﻿@using BeyzanurDuzceEduTr.Models.Entities;
+@model IEnumerable<Users>
+@{
+    ViewData["Title"] = "User";
+    Layout = "~/Views/Admin/Shared/_Layout.cshtml";
+}
+<script src="~/Content/assets/js/layout.js"></script>
+<!-- Bootstrap Css -->
+<link href="~/Content/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<!-- Icons Css -->
+<link href="~/Content/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+<!-- App Css-->
+<link href="~/Content/assets/css/app.min.css" rel="stylesheet" type="text/css" />
+<!-- custom Css-->
+<link href="~/Content/assets/css/custom.min.css" rel="stylesheet" type="text/css" />
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header d-flex align-items-center border-0">
+                <h5 class="card-title mb-0 flex-grow-1">Kullanıcı Listesi</h5>
+                <div class="flex-shrink-0">
+                    <div class="flax-shrink-0 hstack gap-2">
+                        <button type="button" class="btn btn-success" onclick="openModal()">Yeni Kullanıcı</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="live-preview">
+                    <div class="row">
+
+
+                        <div class="col-xl-12">
+                            <div class="table-responsive mt-4 mt-xl-0">
+                                <table class="table table-success table-striped table-nowrap align-middle mb-0">
+                                    <thead>
+                                        <tr>
+                                            @*<th scope="col">ID</th>*@
+                                            <th scope="col">Kullanıcı Adı</th>
+                                            <th scope="col">Şifre</th>
+                                            <th scope="col">Ad Soyad</th>
+                                            <th scope="col">Email</th>
+                                            <th scope="col">Oluşturma Tarihi</th>
+                                            <th scope="col">İşlemler</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            foreach (var item in Model)
+                                            {
+                                                <tr>
+                                                    @*<td class="fw-medium">@item.Id</td>*@
+                                                    <td>@item.UserName</td>
+                                                    <td>*****</td>
+                                                    <td>@item.FullName</td>
+                                                    <td>@item.Email</td>
+                                                    <td>@item.CreateDate</td>
+                                                    <td>
+                                                        <div class="hstack gap-3 flex-wrap">
+                                                            <a href="javascript:void(0);" class="link-success fs-15" onclick="openEditModal('@item.Id')"><i class="ri-edit-2-line"></i></a>
+                                                            <a href="javascript:void(0);" class="link-danger fs-15" onclick="deleteUser('@item.Id')"><i class="ri-delete-bin-line"></i></a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!--end col-->
+                    </div>
+                    <!--end row-->
+                </div>
+
+            </div>
+        </div><!-- end card-body -->
+    </div><!-- end card -->
+</div>
+<div class="modal fade bs-example-modal-lg" id="addUserModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myLargeModalLabel">Kullanıcı Oluştur</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <partial name="PV_addUserView" />
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:void(0);" class="btn btn-link link-success fw-medium shadow-none" data-bs-dismiss="modal"><i class="ri-close-line me-1 align-middle"></i> İptal</a>
+                <button type="button" class="btn btn-primary " onclick="SaveUser()">Kaydet</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<div class="modal fade bs-example-modal-lg" id="updateUserModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myLargeModalLabel">Kullanıcı Güncelle</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:void(0);" class="btn btn-link link-success fw-medium shadow-none" data-bs-dismiss="modal"><i class="ri-close-line me-1 align-middle"></i> İptal</a>
+                <button type="button" class="btn btn-primary " onclick="UpdateUser()">Güncelle</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<!-- JAVASCRIPT -->
+<script src="~/Content/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="~/Content/assets/libs/simplebar/simplebar.min.js"></script>
+<script src="~/Content/assets/libs/node-waves/waves.min.js"></script>
+<script src="~/Content/assets/libs/feather-icons/feather.min.js"></script>
+<script src="~/Content/assets/js/pages/plugins/lord-icon-2.1.0.js"></script>
+<script src="~/Content/assets/js/plugins.js"></script>
+
+<!-- prismjs plugin -->
+<script src="~/Content/assets/libs/prismjs/prism.js"></script>
+
+<!-- Lord Icon -->
+<script src="https://cdn.lordicon.com/libs/mssddfmo/lord-icon-2.1.0.js"></script>
+
+<!-- Modal Js -->
+<script src="~/Content/assets/js/pages/modal.init.js"></script>
+
+<!-- App js -->
+<script src="~/Content/assets/js/app.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script>
+    function openModal() {
+        $('#addUserModal').modal('show');
+    }
+    function openEditModal(userId)
+    {
+        $.ajax({
+            url: "/Admin/GetUser",
+            type: "POST",
+            dataType: "json",
+            data: { UserId: userId },
+            success: function (data) {
+                console.dir(data);
+                $('#updateUserModal .modal-body').html(data);
+                $('#updateUserModal').modal('show');
+            },
+            error: function (err) {
+                console.dir(err);
+                $('#updateUserModal .modal-body').html(err.responseText);
+                $('#updateUserModal').modal('show');
+            }
+        })
+    }
+    function SaveUser() {
+        var valdata = $("#userForm").serialize();
+        console.dir(valdata);
+        $.ajax({
+            url: "/Admin/AddUser",
+            type: "POST",
+            dataType: "json",
+            data: valdata,
+            success: function (data) {
+                if (data.statu == "ok") {
+                    window.location.reload();
+                }
+                else {
+
+                }
+            }
+        })
+    }
+    function UpdateUser() {
+        var valdata = $("#updateUserForm").serialize();
+        $.ajax({
+            url: "/Admin/UpdateUser",
+            type: "POST",
+            dataType: "json",
+            data: valdata,
+            success: function (data) {
+                if (data.statu == "ok") {
+                    window.location.reload();
+                }
+                else {
+
+                }
+            }
+        })
+    }
+    function deleteUser(userId) {
+        $.ajax({
+            url: "/Admin/DeleteUser",
+            type: "POST",
+            dataType: "json",
+            data: { Id: userId},
+            success: function (data) {
+                if (data.statu == "ok") {
+                    window.location.reload();
+                }
+                else {
+
+                }
+            }
+        })
+    }
+</script>
